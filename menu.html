@@ -1,0 +1,127 @@
+<!Doctype html>
+<html lang"ko">
+ <head>
+  <title> 타이머(수험생,모의고사) </title>
+  <script src="script.js">
+</script>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="timerstylesheet.css">
+  <link rel="shortcut icon" href="시계.png">
+  <link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Nanum+Gothic:400,700,800|Oswald:200,300,400,500,600,700|Oxanium:200,300,400,500,600,700,800|Poor+Story&display=swap&subset=cyrillic,cyrillic-ext,korean,latin-ext,vietnamese" rel="stylesheet">
+</head>
+ <body>
+  <!-- 메뉴아이-->
+  <div id="grid1">
+  <input type="checkbox" id="menuicon">
+  <label for="menuicon" id="hiyom">
+  <span></span>
+  <span></span>
+  <span></span>
+  </label>
+  <div class="sidebar"   id="sidebar_content">
+    <!--사이드바콘텐츠-->
+    <div class="accordian" id="a">
+     <input type="checkbox" id="menuu1">
+     <label for="menuu1">모의고사 모드<em></em></label>
+     <div class="app">
+       <script>
+        startMogo(['고1','고2','고3','경찰,사관'], 0)
+       </script>
+     </div>
+    </div>
+    <div class="accordian">
+     <input type="checkbox" id="menuu2">
+     <label for="menuu2">집중모드(공부)<em></em></label>
+     <div class="app">
+     </div>
+     <script>
+     startMogo(['일반','백색소음'], 1)
+     </script>
+    </div>
+    <div class="accordian">
+     <input type="checkbox" id="menuu3">
+     <label for="menuu3">공부자극<em></em></label>
+     <div class="app">
+     </div>
+     <script>
+      startMogo(['명언','일침'],2)
+     </script>
+   </label>
+    </div>
+    <div id="dark_mode1">
+    <span id='d_m_text'>dark mode</span>
+    <input type="checkbox"  value="night" id="switch" onclick=
+    "night_mode(this)"
+
+     >
+    <label for="switch"></label>
+  </div>
+  </div>
+
+  <!--제목텍스트-->
+  <div >
+   <header><h1>TIMER</h1></header>
+  </div>
+</div>
+<!--본문영역-->
+<h1 id= 'korean'>국어 영역</h1>
+<label for="switch"></label>
+<br><br><br>
+<div id="countdown"> 80:00</div>
+<button id="startStop" onclick="startStop()">
+  Start
+</button>
+ <script>
+   //타이머 기능을 구현함.
+
+
+
+     var displaySeconds =0;
+     var displayminutes =0;
+     //시작시간
+     var startingMinutes = 80;
+     var time = startingMinutes * 60;
+
+     var countdownEl = document.getElementById('countdown');
+     function updateCountdown() {
+       time --;
+       var minutes = Math.floor(time / 60);
+       var seconds = time % 60;
+      if(seconds < 10){
+        displaySeconds = "0" + seconds.toString();
+      }
+      else{
+       displaySeconds = seconds;
+     }
+     if(minutes < 10){
+       displayminutes = "0" + minutes.toString();
+     }
+     else{
+       displayminutes = minutes;
+     }
+     countdownEl.innerHTML = displayminutes + ":" + displaySeconds;
+       }
+    //버튼의 기능을 구현 함.
+    var interval = null;
+    var status = 'stopped';
+    function startStop() {
+
+      if(status === 'stopped'){
+        interval = window.setInterval(updateCountdown, 1000);
+        document.getElementById('startStop').innerHTML = "pause"
+        status = "started"
+      }
+      else{
+        window.clearInterval(interval);
+        document.getElementById('startStop').innerHTML ="start"
+        status = "stopped"
+      }
+    }
+
+
+ </script>
+</body>
+</html>
